@@ -13,6 +13,10 @@
         .container {
             margin-top: 20px;
         }
+        .logo {
+            width: 150px;
+            margin-bottom: 10px;
+        }
         input {
             padding: 10px;
             font-size: 18px;
@@ -31,14 +35,22 @@
             border-radius: 10px;
             max-width: 100%;
         }
+        .loading {
+            display: none;
+            font-size: 18px;
+            color: #d9534f;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <img src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=400,height=400,onerror=redirect,format=auto/EZGZVA/2xJzsdzWIJJ3VJF2V0ZGPiREWvAZhgDlrQWm6Q2z.png" alt="شعار خزين" class="logo"> <!-- استبدل برابط شعار خزين -->
         <h2>🎉 أدخل اسمك لإنشاء تهنئتك 🎉</h2>
         <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
         <button onclick="generateCard()">إنشاء التهنئة</button>
+        <p class="loading" id="loadingText">⏳ جاري التحميل...</p>
         <br>
         <canvas id="greetingCanvas"></canvas>
         <br>
@@ -53,33 +65,32 @@
                 return;
             }
 
+            var loadingText = document.getElementById("loadingText");
+            loadingText.style.display = "block";
+
             var canvas = document.getElementById("greetingCanvas");
             var ctx = canvas.getContext("2d");
 
-            // تحميل الصورة الخلفية
             var img = new Image();
-            img.src = "https://i.ibb.co/CKn4fbSh/khaz.jpg"; // استبدل هذا بمسار الصورة المرفوعة
+            img.src = "https://i.ibb.co/CKn4fbSh/khaz.jpg"; // استبدل بمسار الصورة الخلفية
             img.onload = function() {
                 canvas.width = img.width;
                 canvas.height = img.height;
                 ctx.drawImage(img, 0, 0);
 
-                // إعداد الخط
                 ctx.font = "bold 36px Arial";
-                ctx.fillStyle = "#FFFFFF"; // لون النص
+                ctx.fillStyle = "#FFFFFF";
                 ctx.textAlign = "center";
                 
-                // تحديد موقع النص (يجب تعديل هذه القيم لتناسب الصورة)
                 var textX = canvas.width / 2;
-                var textY = 575; // موقع النص في الصورة
-
-                // رسم النص الجديد
+                var textY = 860;
                 ctx.fillText(name, textX, textY);
 
-                // تفعيل رابط التحميل
                 var downloadLink = document.getElementById("downloadLink");
                 downloadLink.href = canvas.toDataURL("image/png");
                 downloadLink.style.display = "inline";
+                
+                loadingText.style.display = "none";
             };
         }
     </script>
