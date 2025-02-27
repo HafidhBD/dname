@@ -41,12 +41,22 @@
             color: #d9534f;
             margin-top: 10px;
         }
+        #downloadButton {
+            display: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=400,height=400,onerror=redirect,format=auto/EZGZVA/2xJzsdzWIJJ3VJF2V0ZGPiREWvAZhgDlrQWm6Q2z.png" alt="شعار خزين" class="logo"> <!-- استبدل برابط شعار خزين -->
+        <img src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=400,height=400,onerror=redirect,format=auto/EZGZVA/2xJzsdzWIJJ3VJF2V0ZGPiREWvAZhgDlrQWm6Q2z.png" alt="شعار خزين" class="logo">
         <h2>🎉 أدخل اسمك لإنشاء تهنئتك 🎉</h2>
         <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
         <button onclick="generateCard()">إنشاء التهنئة</button>
@@ -54,7 +64,7 @@
         <br>
         <canvas id="greetingCanvas"></canvas>
         <br>
-        <a id="downloadLink" style="display:none;" download="تهنئة.png">📥 تحميل الصورة</a>
+        <button id="downloadButton" onclick="downloadImage()">📥 تحميل التهنئة</button>
     </div>
 
     <script>
@@ -72,7 +82,7 @@
             var ctx = canvas.getContext("2d");
 
             var img = new Image();
-            img.src = "https://i.ibb.co/CKn4fbSh/khaz.jpg"; // استبدل بمسار الصورة الخلفية
+            img.src = "https://i.ibb.co/CKn4fbSh/khaz.jpg";
             img.onload = function() {
                 canvas.width = img.width;
                 canvas.height = img.height;
@@ -85,13 +95,20 @@
                 var textX = canvas.width / 2;
                 var textY = 860;
                 ctx.fillText(name, textX, textY);
-
-                var downloadLink = document.getElementById("downloadLink");
-                downloadLink.href = canvas.toDataURL("image/png");
-                downloadLink.style.display = "inline";
+                
+                var downloadButton = document.getElementById("downloadButton");
+                downloadButton.style.display = "inline-block";
                 
                 loadingText.style.display = "none";
             };
+        }
+
+        function downloadImage() {
+            var canvas = document.getElementById("greetingCanvas");
+            var downloadLink = document.createElement("a");
+            downloadLink.href = canvas.toDataURL("image/png");
+            downloadLink.download = "تهنئة.png";
+            downloadLink.click();
         }
     </script>
 
