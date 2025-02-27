@@ -64,7 +64,7 @@
         <br>
         <canvas id="greetingCanvas"></canvas>
         <br>
-        <button id="downloadButton" onclick="downloadImage()">📥 تحميل التهنئة</button>
+        <a id="downloadButton" href="#" download="تهنئة.png" style="display:none;">📥 تحميل التهنئة</a>
     </div>
 
     <script>
@@ -82,6 +82,7 @@
             var ctx = canvas.getContext("2d");
 
             var img = new Image();
+            img.crossOrigin = "anonymous";
             img.src = "https://i.ibb.co/CKn4fbSh/khaz.jpg";
             img.onload = function() {
                 canvas.width = img.width;
@@ -97,18 +98,11 @@
                 ctx.fillText(name, textX, textY);
                 
                 var downloadButton = document.getElementById("downloadButton");
+                downloadButton.href = canvas.toDataURL("image/png");
                 downloadButton.style.display = "inline-block";
                 
                 loadingText.style.display = "none";
             };
-        }
-
-        function downloadImage() {
-            var canvas = document.getElementById("greetingCanvas");
-            var downloadLink = document.createElement("a");
-            downloadLink.href = canvas.toDataURL("image/png");
-            downloadLink.download = "تهنئة.png";
-            downloadLink.click();
         }
     </script>
 
