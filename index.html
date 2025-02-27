@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصميم تهنئة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        canvas {
+            margin-top: 20px;
+            border-radius: 10px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🎉 أدخل اسمك لإنشاء تهنئتك 🎉</h2>
+        <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
+        <button onclick="generateCard()">إنشاء التهنئة</button>
+        <br>
+        <canvas id="greetingCanvas"></canvas>
+        <br>
+        <a id="downloadLink" style="display:none;" download="تهنئة.png">📥 تحميل الصورة</a>
+    </div>
+
+    <script>
+        function generateCard() {
+            var name = document.getElementById("nameInput").value;
+            if (name.trim() === "") {
+                alert("يرجى إدخال الاسم أولاً!");
+                return;
+            }
+
+            var canvas = document.getElementById("greetingCanvas");
+            var ctx = canvas.getContext("2d");
+
+            // تحميل الصورة الخلفية
+            var img = new Image();
+            img.src = "https://i.ibb.co/HTkTZjMm/Whats-App-Image-2025-02-27-at-11-40-05-AM.jpg"; // استبدل هذا بمسار الصورة المرفوعة
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+
+                // إعداد الخط
+                ctx.font = "bold 36px Arial";
+                ctx.fillStyle = "#FFFFFF"; // لون النص
+                ctx.textAlign = "center";
+                
+                // تحديد موقع النص (يجب تعديل هذه القيم لتناسب الصورة)
+                var textX = canvas.width / 2;
+                var textY = 430; // موقع النص في الصورة
+
+                // رسم النص الجديد
+                ctx.fillText(name, textX, textY);
+
+                // تفعيل رابط التحميل
+                var downloadLink = document.getElementById("downloadLink");
+                downloadLink.href = canvas.toDataURL("image/png");
+                downloadLink.style.display = "inline";
+            };
+        }
+    </script>
+
+</body>
+</html>
