@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">تهنئة رمضان | ويفز</title>
-    <link rel="icon" href="https://www.waves.sa/storage/2023/09/cropped-logo-32x32.png" sizes="32x32" />
+    <title id="pageTitle">تهنئة عيد الفطر | خزين</title>
+    <link rel="icon" href="hhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSew2LDsQ0asE4xjTrH3wUh26R_e49qiUApXA&s" sizes="32x32" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -186,7 +186,6 @@
     <button class="language-switch" onclick="toggleLanguage()">English</button>
     
     <div id="nameScreen" class="container active">
-        <img src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=200,height=200,onerror=redirect,format=auto/EZGZVA/2xJzsdzWIJJ3VJF2V0ZGPiREWvAZhgDlrQWm6Q2z.png" alt="شعار خزين" class="logo">
         <h2 id="nameTitle">🎉 أدخل اسمك 🎉</h2>
         <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
         <button onclick="goToDesignSelection()" id="nextButton">التالي</button>
@@ -369,11 +368,7 @@
                     ctx.fillStyle = "#FFFFFF";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
-                    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-                    ctx.shadowBlur = 5 * scaleFactor;
-                    ctx.shadowOffsetX = 2 * scaleFactor;
-                    ctx.shadowOffsetY = 2 * scaleFactor;
-                    const textY = 990 * (canvas.height / img.height);
+                    const textY = 970 * (canvas.height / img.height);
                     ctx.fillText(name, canvas.width / 2, textY);
                     
                     // 2. إعداد الكانفاس للتحميل (بالجودة الأصلية)
@@ -386,11 +381,7 @@
                     downloadCtx.fillStyle = "#FFFFFF";
                     downloadCtx.textAlign = "center";
                     downloadCtx.textBaseline = "middle";
-                    downloadCtx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-                    downloadCtx.shadowBlur = 5;
-                    downloadCtx.shadowOffsetX = 2;
-                    downloadCtx.shadowOffsetY = 2;
-                    downloadCtx.fillText(name, downloadCanvas.width / 2, 990);
+                    downloadCtx.fillText(name, downloadCanvas.width / 2, 969);
                     
                     // تعيين رابط التحميل
                     document.getElementById("downloadButton").href = downloadCanvas.toDataURL("image/png", 1.0);
@@ -439,10 +430,7 @@
                     ctx.fillStyle = "#FFFFFF";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
-                    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-                    ctx.shadowBlur = 5 * scaleFactor;
-                    ctx.shadowOffsetX = 2 * scaleFactor;
-                    ctx.shadowOffsetY = 2 * scaleFactor;
+
                     
                     const textY = 990 * (canvas.height / img.height);
                     const name = document.getElementById("nameInput").value;
