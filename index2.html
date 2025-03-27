@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">تهنئة رمضان | ويفز</title>
+    <link rel="icon" href="https://www.waves.sa/storage/2023/09/cropped-logo-32x32.png" sizes="32x32" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #652c91 0%, #fad0c4 100%);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+        .container {
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+            margin: 20px 0;
+        }
+        .container.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .designs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .design-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        .design-option:hover {
+            transform: scale(1.05);
+        }
+        .design-option img {
+            width: 120px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+        .design-option img:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .canvas-container {
+            max-height: 60vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        canvas {
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        canvas:hover {
+            transform: scale(1.02);
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        .download-button {
+            background-color: #3498db;
+            color: white;
+        }
+        .download-button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .back-button {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .back-button:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .language-switch:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 80%;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            outline: none;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+        input[type="radio"] + img {
+            border: 3px solid transparent;
+        }
+        input[type="radio"]:checked + img {
+            border: 3px solid #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
+        }
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <button class="language-switch" onclick="toggleLanguage()">English</button>
+    
+    <div id="nameScreen" class="container active">
+        <h2 id="nameTitle">🎉 أدخل اسمك 🎉</h2>
+        <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
+        <button onclick="goToDesignSelection()" id="nextButton">التالي</button>
+    </div>
+    
+    <div id="designScreen" class="container">
+        <h2 id="designTitle">🎨 اختر التصميم 🎨</h2>
+        <div class="designs">
+            <label class="design-option">
+                <input type="radio" name="design" value="https://i.ibb.co/mC5qfzFs/Whats-App-Image-2025-03-26-at-5-13-51-PM-1.jpg">
+                <img src="https://i.ibb.co/mC5qfzFs/Whats-App-Image-2025-03-26-at-5-13-51-PM-1.jpg" onclick="selectDesign(this)">
+            </label>
+            <label class="design-option">
+                <input type="radio" name="design" value="https://i.ibb.co/X06v7v7/Whats-App-Image-2025-03-26-at-5-13-51-PM-2.jpg">
+                <img src="https://i.ibb.co/X06v7v7/Whats-App-Image-2025-03-26-at-5-13-51-PM-2.jpg" onclick="selectDesign(this)">
+            </label>
+            <label class="design-option">
+                <input type="radio" name="design" value="https://i.ibb.co/yBxHP7hV/Whats-App-Image-2025-03-26-at-5-13-51-PM-3.jpg">
+                <img src="https://i.ibb.co/yBxHP7hV/Whats-App-Image-2025-03-26-at-5-13-51-PM-3.jpg" onclick="selectDesign(this)">
+            </label>
+            <label class="design-option">
+                <input type="radio" name="design" value="https://i.ibb.co/dsQh1wPR/Whats-App-Image-2025-03-26-at-5-13-51-PM.jpg">
+                <img src="https://i.ibb.co/dsQh1wPR/Whats-App-Image-2025-03-26-at-5-13-51-PM.jpg" onclick="selectDesign(this)">
+            </label>
+            <label class="design-option">
+                <input type="radio" name="design" value="https://i.ibb.co/xtc6f65p/Whats-App-Image-2025-03-26-at-5-13-52-PM.jpg">
+                <img src="https://i.ibb.co/xtc6f65p/Whats-App-Image-2025-03-26-at-5-13-52-PM.jpg" onclick="selectDesign(this)">
+            </label>
+        </div>
+        <button onclick="generateCard()" id="generateButton">إنشاء التهنئة</button>
+    </div>
+    
+    <div id="resultScreen" class="container">
+        <div class="canvas-container">
+            <canvas id="greetingCanvas"></canvas>
+        </div>
+        <div class="buttons-container">
+            <a id="downloadButton" class="button download-button" href="#" download="تهنئة.png">📥 تحميل التهنئة</a>
+            <button class="button back-button" onclick="goBackToName()">🔄 تعديل الاسم</button>
+            <button class="button back-button" onclick="goBackToDesign()">🎨 تغيير التصميم</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedDesign = "";
+        let isArabic = true;
+        let currentScreen = "nameScreen";
+
+        const texts = {
+            arabic: {
+                pageTitle: "تهنئة رمضان | ويفز",
+                nameTitle: "🎉 أدخل اسمك 🎉",
+                namePlaceholder: "اكتب اسمك هنا",
+                nextButton: "التالي",
+                designTitle: "🎨 اختر التصميم 🎨",
+                generateButton: "إنشاء التهنئة",
+                downloadButton: "📥 تحميل التهنئة",
+                backToName: "🔄 تعديل الاسم",
+                backToDesign: "🎨 تغيير التصميم",
+                switchToEnglish: "English"
+            },
+            english: {
+                pageTitle: "Ramadan Greeting | Waves",
+                nameTitle: "🎉 Enter Your Name 🎉",
+                namePlaceholder: "Enter your name here",
+                nextButton: "Next",
+                designTitle: "🎨 Choose a Design 🎨",
+                generateButton: "Generate Greeting",
+                downloadButton: "📥 Download Greeting",
+                backToName: "🔄 Edit Name",
+                backToDesign: "🎨 Change Design",
+                switchToArabic: "عربي"
+            }
+        };
+
+        function toggleLanguage() {
+            isArabic = !isArabic;
+            const language = isArabic ? 'arabic' : 'english';
+
+            document.getElementById("pageTitle").textContent = texts[language].pageTitle;
+            document.getElementById("nameTitle").textContent = texts[language].nameTitle;
+            document.getElementById("nameInput").placeholder = texts[language].namePlaceholder;
+            document.getElementById("nextButton").textContent = texts[language].nextButton;
+            document.getElementById("designTitle").textContent = texts[language].designTitle;
+            document.getElementById("generateButton").textContent = texts[language].generateButton;
+            document.getElementById("downloadButton").textContent = texts[language].downloadButton;
+            document.querySelector(".language-switch").textContent = isArabic ? texts[language].switchToArabic : texts.arabic.switchToEnglish;
+        }
+
+        function showLoading(show) {
+            document.querySelector('.loading').style.display = show ? 'flex' : 'none';
+        }
+
+        function switchScreen(newScreen) {
+            const currentElement = document.getElementById(currentScreen);
+            const newElement = document.getElementById(newScreen);
+            
+            currentElement.classList.remove('active');
+            setTimeout(() => {
+                newElement.classList.add('active');
+                currentScreen = newScreen;
+                
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                if (newScreen === "resultScreen") {
+                    setTimeout(() => {
+                        const buttons = document.querySelector(".buttons-container");
+                        buttons.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest'
+                        });
+                    }, 100);
+                }
+            }, 500);
+        }
+
+        function goToDesignSelection() {
+            let name = document.getElementById("nameInput").value.trim();
+            if (name === "") {
+                alert(isArabic ? "يرجى إدخال الاسم أولاً!" : "Please enter your name first!");
+                return;
+            }
+            switchScreen("designScreen");
+        }
+
+        function selectDesign(imgElement) {
+            const radio = imgElement.previousElementSibling;
+            radio.checked = true;
+            selectedDesign = radio.value;
+            
+            document.querySelectorAll('.design-option img').forEach(img => {
+                img.style.border = '3px solid transparent';
+            });
+            
+            imgElement.style.border = '3px solid #3498db';
+            imgElement.style.boxShadow = '0 0 10px rgba(52, 152, 219, 0.7)';
+        }
+
+        function generateCard() {
+            if (!selectedDesign) {
+                alert(isArabic ? "يرجى اختيار تصميم أولاً!" : "Please choose a design first!");
+                return;
+            }
+            
+            let name = document.getElementById("nameInput").value;
+            let canvas = document.getElementById("greetingCanvas");
+            let ctx = canvas.getContext("2d");
+            
+            // إظهار مؤشر التحميل
+            showLoading(true);
+            
+            // إنشاء كانفاس للتحميل بالجودة الأصلية
+            let downloadCanvas = document.createElement('canvas');
+            let downloadCtx = downloadCanvas.getContext('2d');
+            
+            let img = new Image();
+            img.crossOrigin = "Anonymous";
+            
+            // إضافة معلمة عشوائية لمنع الكاش
+            img.src = selectedDesign + (selectedDesign.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+            
+            img.onload = function() {
+                try {
+                    // 1. إعداد الكانفاس للعرض
+                    const maxCanvasHeight = window.innerHeight * 0.6;
+                    const scaleFactor = Math.min(1, maxCanvasHeight / img.height);
+                    
+                    canvas.width = img.width * scaleFactor;
+                    canvas.height = img.height * scaleFactor;
+                    
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    // إضافة النص للعرض
+                    const fontSize = 36 * scaleFactor;
+                    ctx.font = `bold ${fontSize}px 'Arial', sans-serif`;
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                    ctx.shadowBlur = 5 * scaleFactor;
+                    ctx.shadowOffsetX = 2 * scaleFactor;
+                    ctx.shadowOffsetY = 2 * scaleFactor;
+                    const textY = 990 * (canvas.height / img.height);
+                    ctx.fillText(name, canvas.width / 2, textY);
+                    
+                    // 2. إعداد الكانفاس للتحميل (بالجودة الأصلية)
+                    downloadCanvas.width = img.width;
+                    downloadCanvas.height = img.height;
+                    downloadCtx.drawImage(img, 0, 0);
+                    
+                    // إضافة النص للتحميل
+                    downloadCtx.font = 'bold 36px Arial';
+                    downloadCtx.fillStyle = "#FFFFFF";
+                    downloadCtx.textAlign = "center";
+                    downloadCtx.textBaseline = "middle";
+                    downloadCtx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                    downloadCtx.shadowBlur = 5;
+                    downloadCtx.shadowOffsetX = 2;
+                    downloadCtx.shadowOffsetY = 2;
+                    downloadCtx.fillText(name, downloadCanvas.width / 2, 990);
+                    
+                    // تعيين رابط التحميل
+                    document.getElementById("downloadButton").href = downloadCanvas.toDataURL("image/png", 1.0);
+                    
+                    // الانتقال لشاشة النتيجة
+                    switchScreen("resultScreen");
+                } catch (error) {
+                    console.error("Error generating card:", error);
+                    alert(isArabic ? "حدث خطأ أثناء إنشاء التهنئة. يرجى المحاولة مرة أخرى." : "Error generating greeting. Please try again.");
+                } finally {
+                    showLoading(false);
+                }
+            };
+            
+            img.onerror = function() {
+                alert(isArabic ? "حدث خطأ في تحميل الصورة. يرجى المحاولة مرة أخرى." : "Error loading image. Please try again.");
+                showLoading(false);
+            };
+        }
+
+        function goBackToName() {
+            switchScreen("nameScreen");
+        }
+
+        function goBackToDesign() {
+            switchScreen("designScreen");
+        }
+        
+        window.addEventListener('resize', function() {
+            if (currentScreen === "resultScreen" && selectedDesign) {
+                const canvas = document.getElementById("greetingCanvas");
+                const img = new Image();
+                img.src = selectedDesign;
+                img.onload = function() {
+                    const maxCanvasHeight = window.innerHeight * 0.6;
+                    const scaleFactor = Math.min(1, maxCanvasHeight / img.height);
+                    
+                    canvas.width = img.width * scaleFactor;
+                    canvas.height = img.height * scaleFactor;
+                    
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    const fontSize = 36 * scaleFactor;
+                    ctx.font = `bold ${fontSize}px 'Arial', sans-serif`;
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                    ctx.shadowBlur = 5 * scaleFactor;
+                    ctx.shadowOffsetX = 2 * scaleFactor;
+                    ctx.shadowOffsetY = 2 * scaleFactor;
+                    
+                    const textY = 990 * (canvas.height / img.height);
+                    const name = document.getElementById("nameInput").value;
+                    ctx.fillText(name, canvas.width / 2, textY);
+                };
+            }
+        });
+    </script>
+</body>
+</html>
