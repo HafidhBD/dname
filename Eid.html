@@ -369,7 +369,7 @@
                     ctx.fillStyle = "#FFFFFF";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
-                    const textY = 970 * (canvas.height / img.height);
+                    const textY = 660 * (canvas.height / img.height);
                     ctx.fillText(name, canvas.width / 2, textY);
                     
                     // 2. إعداد الكانفاس للتحميل (بالجودة الأصلية)
@@ -382,7 +382,7 @@
                     downloadCtx.fillStyle = "#FFFFFF";
                     downloadCtx.textAlign = "center";
                     downloadCtx.textBaseline = "middle";
-                    downloadCtx.fillText(name, downloadCanvas.width / 2, 969);
+                    downloadCtx.fillText(name, downloadCanvas.width / 2, 660);
                     
                     // تعيين رابط التحميل
                     document.getElementById("downloadButton").href = downloadCanvas.toDataURL("image/png", 1.0);
