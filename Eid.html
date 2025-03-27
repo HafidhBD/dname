@@ -6,8 +6,15 @@
     <title id="pageTitle">تهنئة عيد الفطر | خزين</title>
     <link rel="icon" href="https://i.ibb.co/Rrd3G98/images.jpg" sizes="32x32" />
     <style>
+        @font-face {
+            font-family: 'Suisse Intl Bold';
+            src: url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSansArabic/NotoSansArabic-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Suisse Intl Bold', Arial, sans-serif;
             text-align: center;
             background: linear-gradient(135deg, #652c91 0%, #fad0c4 100%);
             color: #333;
@@ -85,6 +92,7 @@
             border-radius: 5px;
             margin-top: 10px;
             transition: all 0.3s ease;
+            font-family: 'Suisse Intl Bold', Arial, sans-serif;
         }
         .download-button {
             background-color: #3498db;
@@ -116,6 +124,7 @@
             border-radius: 5px;
             transition: all 0.3s ease;
             z-index: 100;
+            font-family: 'Suisse Intl Bold', Arial, sans-serif;
         }
         .language-switch:hover {
             background: #2980b9;
@@ -129,6 +138,7 @@
             margin: 10px 0;
             width: 80%;
             transition: all 0.3s ease;
+            font-family: 'Suisse Intl Bold', Arial, sans-serif;
         }
         input:focus {
             border-color: #3498db;
@@ -365,11 +375,11 @@
                     
                     // إضافة النص للعرض
                     const fontSize = 28 * scaleFactor;
-                    ctx.font = `bold ${fontSize}px 'Arial', sans-serif`;
+                    ctx.font = `bold ${fontSize}px 'Suisse Intl Bold', Arial, sans-serif`;
                     ctx.fillStyle = "#FFFFFF";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
-                    const textY = 650 * (canvas.height / img.height);
+                    const textY = 660 * (canvas.height / img.height);
                     ctx.fillText(name, canvas.width / 2, textY);
                     
                     // 2. إعداد الكانفاس للتحميل (بالجودة الأصلية)
@@ -378,11 +388,11 @@
                     downloadCtx.drawImage(img, 0, 0);
                     
                     // إضافة النص للتحميل
-                    downloadCtx.font = 'bold 28px Arial';
+                    downloadCtx.font = 'bold 28px "Suisse Intl Bold", Arial, sans-serif';
                     downloadCtx.fillStyle = "#FFFFFF";
                     downloadCtx.textAlign = "center";
                     downloadCtx.textBaseline = "middle";
-                    downloadCtx.fillText(name, downloadCanvas.width / 2, 650);
+                    downloadCtx.fillText(name, downloadCanvas.width / 2, 660);
                     
                     // تعيين رابط التحميل
                     document.getElementById("downloadButton").href = downloadCanvas.toDataURL("image/png", 1.0);
@@ -427,7 +437,7 @@
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                     
                     const fontSize = 36 * scaleFactor;
-                    ctx.font = `bold ${fontSize}px 'Arial', sans-serif`;
+                    ctx.font = `bold ${fontSize}px 'Suisse Intl Bold', Arial, sans-serif`;
                     ctx.fillStyle = "#FFFFFF";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
