@@ -118,8 +118,6 @@
         canvas {
             max-width: 100%;
             max-height: 55vh;
-            width: auto;
-            height: auto;
             border-radius: 8px;
             display: block;
             margin: 0 auto;
@@ -289,23 +287,23 @@
         <h2 id="designTitle">🎨 اختر التصميم 🎨</h2>
         <div class="designs">
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des1.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des1.png" data-text-x="50%" data-text-y="85%">
                 <img src="assets/images/des1.png" alt="تصميم 1" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des2.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des2.png" data-text-x="50%" data-text-y="85%">
                 <img src="assets/images/des2.png" alt="تصميم 2" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des3.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des3.png" data-text-x="50%" data-text-y="85%">
                 <img src="assets/images/des3.png" alt="تصميم 3" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des4.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des4.png" data-text-x="50%" data-text-y="85%">
                 <img src="assets/images/des4.png" alt="تصميم 4" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des5.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des5.png" data-text-x="50%" data-text-y="85%">
                 <img src="assets/images/des5.png" alt="تصميم 5" loading="lazy">
             </label>
         </div>
@@ -331,19 +329,19 @@
         let selectedDesign = "";
         let isArabic = true;
         let currentScreen = "nameScreen";
-        const originalImageWidth = 1080;
-        const originalImageHeight = 1459;
         let downloadCount = localStorage.getItem('downloadCount') || 0;
+        let imageNaturalWidth = 0;
+        let imageNaturalHeight = 0;
 
         // Initialize download counter display
         document.getElementById('downloadCount').textContent = downloadCount;
 
         const designSettings = {
-            "assets/images/des1.png": { x: 540, y: 1100, fontSize: 40 },
-            "assets/images/des2.png": { x: 540, y: 1100, fontSize: 40 },
-            "assets/images/des3.png": { x: 540, y: 1100, fontSize: 40 },
-            "assets/images/des4.png": { x: 540, y: 1100, fontSize: 40 },
-            "assets/images/des5.png": { x: 540, y: 1100, fontSize: 40 }
+            "assets/images/des1.png": { x: "50%", y: "85%", fontSize: "5%" },
+            "assets/images/des2.png": { x: "50%", y: "85%", fontSize: "5%" },
+            "assets/images/des3.png": { x: "50%", y: "85%", fontSize: "5%" },
+            "assets/images/des4.png": { x: "50%", y: "85%", fontSize: "5%" },
+            "assets/images/des5.png": { x: "50%", y: "85%", fontSize: "5%" }
         };
 
         const texts = {
@@ -480,38 +478,67 @@
             showLoading(true);
 
             try {
-                const designSetting = designSettings[selectedDesign];
                 const img = await loadImage(selectedDesign);
                 
-                const maxWidth = Math.min(originalImageWidth, window.innerWidth * 0.9);
-                const scaleFactor = maxWidth / originalImageWidth;
-                const displayHeight = originalImageHeight * scaleFactor;
+                // Get the natural dimensions of the image
+                imageNaturalWidth = img.naturalWidth;
+                imageNaturalHeight = img.naturalHeight;
                 
-                canvas.width = originalImageWidth;
-                canvas.height = originalImageHeight;
-                canvas.style.width = `${maxWidth}px`;
+                // Calculate display dimensions based on viewport
+                const maxDisplayWidth = Math.min(imageNaturalWidth, window.innerWidth * 0.9);
+                const scaleFactor = maxDisplayWidth / imageNaturalWidth;
+                const displayHeight = imageNaturalHeight * scaleFactor;
+                
+                // Set canvas dimensions to natural image size
+                canvas.width = imageNaturalWidth;
+                canvas.height = imageNaturalHeight;
+                
+                // Set display dimensions
+                canvas.style.width = `${maxDisplayWidth}px`;
                 canvas.style.height = `${displayHeight}px`;
                 
+                // Draw the image
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 
-                ctx.font = `bold ${designSetting.fontSize}px Arial, sans-serif`;
+                // Get design settings
+                const designSetting = designSettings[selectedDesign];
+                
+                // Calculate text position based on percentages
+                const textX = designSetting.x.includes('%') ? 
+                    (parseInt(designSetting.x) / 100 * canvas.width : 
+                    parseInt(designSetting.x);
+                
+                const textY = designSetting.y.includes('%') ? 
+                    (parseInt(designSetting.y) / 100 * canvas.height : 
+                    parseInt(designSetting.y);
+                
+                // Calculate font size based on percentage of image width
+                const fontSize = designSetting.fontSize.includes('%') ? 
+                    (parseInt(designSetting.fontSize) / 100 * canvas.width) : 
+                    parseInt(designSetting.fontSize);
+                
+                // Draw the text
+                ctx.font = `bold ${fontSize}px Arial, sans-serif`;
                 ctx.fillStyle = "#FFFFFF";
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
-                ctx.fillText(name, designSetting.x, designSetting.y);
+                ctx.fillText(name, textX, textY);
                 
+                // Create download canvas with original dimensions
                 const downloadCanvas = document.createElement('canvas');
-                downloadCanvas.width = originalImageWidth;
-                downloadCanvas.height = originalImageHeight;
+                downloadCanvas.width = imageNaturalWidth;
+                downloadCanvas.height = imageNaturalHeight;
                 const downloadCtx = downloadCanvas.getContext('2d');
                 
+                // Draw image and text to download canvas
                 downloadCtx.drawImage(img, 0, 0);
-                downloadCtx.font = `bold ${designSetting.fontSize}px Arial, sans-serif`;
+                downloadCtx.font = `bold ${fontSize}px Arial, sans-serif`;
                 downloadCtx.fillStyle = "#FFFFFF";
                 downloadCtx.textAlign = "center";
                 downloadCtx.textBaseline = "middle";
-                downloadCtx.fillText(name, designSetting.x, designSetting.y);
+                downloadCtx.fillText(name, textX, textY);
                 
+                // Set download link
                 const dataURL = downloadCanvas.toDataURL("image/png");
                 document.getElementById("downloadButton").href = dataURL;
                 
@@ -547,9 +574,8 @@
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 
-                // حل خاص للصور المحلية
                 if (src.startsWith('assets/')) {
-                    // إنشاء مسار مطلق للصورة
+                    // Create absolute path for local images
                     const baseUrl = window.location.href.replace(/\/[^/]*$/, '');
                     img.src = baseUrl + '/' + src;
                 } else {
@@ -574,7 +600,7 @@
         }
         
         function openDeveloperWhatsApp() {
-            window.open('https://wa.me/967772453819', '_blank'); // استبدل برقم الواتساب الفعلي
+            window.open('https://wa.me/967772453819', '_blank');
         }
         
         document.querySelectorAll('.design-option img').forEach(img => {
@@ -592,12 +618,14 @@
         window.addEventListener('resize', function() {
             if (currentScreen === "resultScreen" && selectedDesign) {
                 const canvas = document.getElementById("greetingCanvas");
-                const maxWidth = Math.min(originalImageWidth, window.innerWidth * 0.9);
-                const scaleFactor = maxWidth / originalImageWidth;
-                const displayHeight = originalImageHeight * scaleFactor;
-                
-                canvas.style.width = `${maxWidth}px`;
-                canvas.style.height = `${displayHeight}px`;
+                if (imageNaturalWidth > 0 && imageNaturalHeight > 0) {
+                    const maxDisplayWidth = Math.min(imageNaturalWidth, window.innerWidth * 0.9);
+                    const scaleFactor = maxDisplayWidth / imageNaturalWidth;
+                    const displayHeight = imageNaturalHeight * scaleFactor;
+                    
+                    canvas.style.width = `${maxDisplayWidth}px`;
+                    canvas.style.height = `${displayHeight}px`;
+                }
             }
         });
     </script>
