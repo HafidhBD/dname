@@ -288,23 +288,23 @@
         <h2 id="designTitle">🎨 اختر التصميم 🎨</h2>
         <div class="designs">
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des1.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des1.png" data-text-x="540" data-text-y="1110" data-color="#FFFFFF">
                 <img src="assets/images/des1.png" alt="تصميم 1" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des2.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des2.png" data-text-x="540" data-text-y="1110" data-color="#FFD700">
                 <img src="assets/images/des2.png" alt="تصميم 2" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des3.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des3.png" data-text-x="540" data-text-y="1110" data-color="#652c91">
                 <img src="assets/images/des3.png" alt="تصميم 3" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des4.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des4.png" data-text-x="540" data-text-y="1110" data-color="#000000">
                 <img src="assets/images/des4.png" alt="تصميم 4" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des5.png" data-text-x="540" data-text-y="1110">
+                <input type="radio" name="design" value="assets/images/des5.png" data-text-x="540" data-text-y="1110" data-color="#2ecc71">
                 <img src="assets/images/des5.png" alt="تصميم 5" loading="lazy">
             </label>
         </div>
@@ -333,16 +333,18 @@
         const originalImageWidth = 1080;
         const originalImageHeight = 1920;
         let downloadCount = localStorage.getItem('downloadCount') || 0;
+        let selectedColor = "#FFFFFF"; // سيتم تحديثه عند اختيار التصميم
 
         // Initialize download counter display
         document.getElementById('downloadCount').textContent = downloadCount;
 
+        // إعدادات التصاميم مع ألوان محددة لكل تصميم
         const designSettings = {
-            "assets/images/des1.png": { x: 540, y: 1300, fontSize: 40 },
-            "assets/images/des2.png": { x: 540, y: 11300, fontSize: 40 },
-            "assets/images/des3.png": { x: 540, y: 1300, fontSize: 40 },
-            "assets/images/des4.png": { x: 540, y: 1300, fontSize: 40 },
-            "assets/images/des5.png": { x: 540, y: 1300, fontSize: 40 }
+            "assets/images/des1.png": { x: 540, y: 1100, fontSize: 40, color: "#FFFFFF" },
+            "assets/images/des2.png": { x: 540, y: 1100, fontSize: 40, color: "#FFD700" },
+            "assets/images/des3.png": { x: 540, y: 1100, fontSize: 40, color: "#652c91" },
+            "assets/images/des4.png": { x: 540, y: 1100, fontSize: 40, color: "#000000" },
+            "assets/images/des5.png": { x: 540, y: 1100, fontSize: 40, color: "#2ecc71" }
         };
 
         const texts = {
@@ -448,6 +450,9 @@
             selectedDesign = radio.value;
             radio.checked = true;
             
+            // تحديث اللون المحدد بناءً على التصميم
+            selectedColor = designSettings[selectedDesign].color;
+            
             document.querySelectorAll('.design-option img').forEach(img => {
                 img.style.border = '2px solid transparent';
                 img.style.boxShadow = '0 3px 10px rgba(0,0,0,0.1)';
@@ -494,7 +499,7 @@
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 
                 ctx.font = `bold ${designSetting.fontSize}px 'Cairo', sans-serif`;
-                ctx.fillStyle = "#FFFFFF";
+                ctx.fillStyle = designSetting.color; // استخدام اللون المحدد للتصميم
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.fillText(name, designSetting.x, designSetting.y);
@@ -506,7 +511,7 @@
                 
                 downloadCtx.drawImage(img, 0, 0);
                 downloadCtx.font = `bold ${designSetting.fontSize}px 'Cairo', sans-serif`;
-                downloadCtx.fillStyle = "#FFFFFF";
+                downloadCtx.fillStyle = designSetting.color; // استخدام اللون المحدد للتصميم
                 downloadCtx.textAlign = "center";
                 downloadCtx.textBaseline = "middle";
                 downloadCtx.fillText(name, designSetting.x, designSetting.y);
