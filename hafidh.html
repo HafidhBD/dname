@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title id="pageTitle">تهنئة عيد الفطر | خزين</title>
     <link rel="icon" href="https://i.ibb.co/Rrd3G98/images.jpg" sizes="32x32" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         @font-face {
-            font-family: 'Suisse Intl Bold';
-            src: url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSansArabic/NotoSansArabic-Bold.ttf') format('truetype');
-            font-weight: bold;
-            font-style: normal;
+            font-family: 'Cairo';
+            src: url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
         }
         
         * {
@@ -20,7 +19,7 @@
         }
         
         body {
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
+            font-family: 'Cairo', Arial, sans-serif;
             text-align: center;
             background: linear-gradient(135deg, #652c91 0%, #fad0c4 100%);
             color: #333;
@@ -134,7 +133,7 @@
             width: 100%;
             max-width: 400px;
             transition: all 0.3s ease;
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
+            font-family: 'Cairo', Arial, sans-serif;
             text-align: center;
             display: block;
             margin-left: auto;
@@ -168,7 +167,7 @@
             box-shadow: 0 5px 15px rgba(101, 44, 145, 0.4);
             margin: 10px 0;
             min-width: 200px;
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
+            font-family: 'Cairo', Arial, sans-serif;
         }
 
         .btn:hover {
@@ -202,7 +201,7 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             z-index: 100;
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
+            font-family: 'Cairo', Arial, sans-serif;
         }
 
         .loading {
@@ -494,7 +493,7 @@
                 
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 
-                ctx.font = `bold ${designSetting.fontSize}px Arial, sans-serif`;
+                ctx.font = `bold ${designSetting.fontSize}px 'Cairo', sans-serif`;
                 ctx.fillStyle = "#FFFFFF";
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
@@ -506,7 +505,7 @@
                 const downloadCtx = downloadCanvas.getContext('2d');
                 
                 downloadCtx.drawImage(img, 0, 0);
-                downloadCtx.font = `bold ${designSetting.fontSize}px Arial, sans-serif`;
+                downloadCtx.font = `bold ${designSetting.fontSize}px 'Cairo', sans-serif`;
                 downloadCtx.fillStyle = "#FFFFFF";
                 downloadCtx.textAlign = "center";
                 downloadCtx.textBaseline = "middle";
@@ -574,7 +573,7 @@
         }
         
         function openDeveloperWhatsApp() {
-            window.open('https://wa.me/967772453819', '_blank'); // استبدل برقم الواتساب الفعلي
+            window.open('https://wa.me/967772453819', '_blank');
         }
         
         document.querySelectorAll('.design-option img').forEach(img => {
