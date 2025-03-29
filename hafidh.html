@@ -184,6 +184,11 @@
             box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
         }
 
+        .btn-share {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
         .btn-back {
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
@@ -319,6 +324,7 @@
         </div>
         <div class="buttons-container">
             <a id="downloadButton" class="btn btn-download" href="#" download="تهنئة-عيد-الفطر.png">📥 تحميل التهنئة</a>
+            <button id="shareButton" class="btn btn-share">🔗 مشاركة التهنئة</button>
             <button class="btn btn-back" onclick="goBackToName()">🔄 تعديل الاسم</button>
             <button class="btn btn-back" onclick="goBackToDesign()">🎨 تغيير التصميم</button>
         </div>
@@ -334,6 +340,7 @@
         const originalImageHeight = 1920;
         let downloadCount = localStorage.getItem('downloadCount') || 0;
         let selectedColor = "#FFFFFF"; // سيتم تحديثه عند اختيار التصميم
+        let greetingDataURL = ""; // لتخزين رابط الصورة للمشاركة
 
         // Initialize download counter display
         document.getElementById('downloadCount').textContent = downloadCount;
@@ -356,11 +363,14 @@
                 designTitle: "🎨 اختر التصميم 🎨",
                 generateButton: "إنشاء التهنئة",
                 downloadButton: "📥 تحميل التهنئة",
+                shareButton: "🔗 مشاركة التهنئة",
                 backToName: "🔄 تعديل الاسم",
                 backToDesign: "🎨 تغيير التصميم",
                 switchToEnglish: "English",
                 downloadCounter: "تم تحميل <span id='downloadCount'>0</span> تهنئة",
-                credits: "MADE WITH ❤️ BY HAFIDH"
+                credits: "MADE WITH ❤️ BY HAFIDH",
+                shareTitle: "تهنئة عيد الفطر",
+                shareText: "تهنئة عيد الفطر من %name% - أنشئ تهنئتك الخاصة عبر خزين"
             },
             english: {
                 pageTitle: "Eid Al-Fitr Greeting | Khazen",
@@ -370,11 +380,14 @@
                 designTitle: "🎨 Choose Design 🎨",
                 generateButton: "Generate Greeting",
                 downloadButton: "📥 Download Greeting",
+                shareButton: "🔗 Share Greeting",
                 backToName: "🔄 Edit Name",
                 backToDesign: "🎨 Change Design",
                 switchToArabic: "العربية",
                 downloadCounter: "<span id='downloadCount'>0</span> greetings downloaded",
-                credits: "MADE WITH ❤️ BY HAFIDH"
+                credits: "MADE WITH ❤️ BY HAFIDH",
+                shareTitle: "Eid Al-Fitr Greeting",
+                shareText: "Eid Al-Fitr Greeting from %name% - Create your own greeting via Khazen"
             }
         };
 
@@ -391,6 +404,7 @@
             document.getElementById("designTitle").textContent = texts[language].designTitle;
             document.getElementById("generateButton").textContent = texts[language].generateButton;
             document.getElementById("downloadButton").textContent = texts[language].downloadButton;
+            document.getElementById("shareButton").textContent = texts[language].shareButton;
             document.querySelector(".language-switch").textContent = isArabic ? texts[language].switchToEnglish : texts.arabic.switchToArabic;
             
             // Update download counter text
@@ -401,7 +415,7 @@
                     `<span id="downloadCount">${downloadCount}</span> greetings downloaded`;
             }
             
-            // Update credits text (though it's the same in both languages)
+            // Update credits text
             document.querySelectorAll(".credits").forEach(el => {
                 el.textContent = texts[language].credits;
             });
@@ -516,13 +530,16 @@
                 downloadCtx.textBaseline = "middle";
                 downloadCtx.fillText(name, designSetting.x, designSetting.y);
                 
-                const dataURL = downloadCanvas.toDataURL("image/png");
-                document.getElementById("downloadButton").href = dataURL;
+                greetingDataURL = downloadCanvas.toDataURL("image/png");
+                document.getElementById("downloadButton").href = greetingDataURL;
                 
                 // Set up download counter increment
                 document.getElementById("downloadButton").addEventListener('click', function() {
                     incrementDownloadCounter();
                 }, { once: true });
+                
+                // Set up share button
+                document.getElementById("shareButton").addEventListener('click', shareGreeting);
                 
                 switchScreen("resultScreen");
             } catch (error) {
@@ -545,6 +562,40 @@
                     `تم تحميل <span id="downloadCount">${downloadCount}</span> تهنئة` : 
                     `<span id="downloadCount">${downloadCount}</span> greetings downloaded`;
             }
+        }
+
+        async function shareGreeting() {
+            const name = document.getElementById("nameInput").value;
+            const language = isArabic ? 'arabic' : 'english';
+            
+            if (navigator.share) {
+                try {
+                    // تحويل data URL إلى blob
+                    const blob = await (await fetch(greetingDataURL)).blob();
+                    const file = new File([blob], 'eid-greeting.png', { type: 'image/png' });
+                    
+                    await navigator.share({
+                        title: texts[language].shareTitle,
+                        text: texts[language].shareText.replace('%name%', name),
+                        files: [file]
+                    });
+                } catch (error) {
+                    console.error('Error sharing:', error);
+                    fallbackShare();
+                }
+            } else {
+                fallbackShare();
+            }
+        }
+
+        function fallbackShare() {
+            const name = document.getElementById("nameInput").value;
+            const language = isArabic ? 'arabic' : 'english';
+            const shareText = texts[language].shareText.replace('%name%', name);
+            
+            // إنشاء رابط مشاركة للويب
+            const shareURL = `https://wa.me/?text=${encodeURIComponent(shareText + '\n' + window.location.href)}`;
+            window.open(shareURL, '_blank');
         }
 
         function loadImage(src) {
