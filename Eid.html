@@ -2,15 +2,21 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title id="pageTitle">تهنئة عيد الفطر | خزين</title>
-    <link rel="icon" href="https://i.ibb.co/Rrd3G98/images.jpg" sizes="32x32" />
+    <link rel="icon" href="assets/images/favicon.jpg" sizes="32x32" />
     <style>
         @font-face {
             font-family: 'Suisse Intl Bold';
-            src: url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSansArabic/NotoSansArabic-Bold.ttf') format('truetype');
+            src: url('assets/fonts/NotoSansArabic-Bold.ttf') format('truetype');
             font-weight: bold;
             font-style: normal;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         body {
@@ -18,108 +24,235 @@
             text-align: center;
             background: linear-gradient(135deg, #652c91 0%, #fad0c4 100%);
             color: #333;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-y: auto;
+            padding: 20px;
+            touch-action: manipulation;
+            line-height: 1.6;
         }
+
+        /* تحسينات للجوال */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                width: 95%;
+                max-width: 100%;
+            }
+            
+            .design-option img {
+                width: 80px;
+                height: 120px;
+            }
+            
+            input, button {
+                font-size: 14px;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .designs {
+                gap: 8px;
+            }
+            
+            .design-option img {
+                width: 70px;
+                height: 100px;
+            }
+            
+            .button {
+                padding: 10px 15px;
+            }
+        }
+
         .container {
             background: #fff;
-            padding: 20px 40px;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             width: 100%;
+            max-width: 600px;
             position: absolute;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: all 0.4s ease;
             pointer-events: none;
-            margin: 20px 0;
+            margin: 0 auto;
         }
+
         .container.active {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
         }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #652c91;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
         .designs {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
             flex-wrap: wrap;
+            margin: 25px 0;
         }
+
         .design-option {
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
+
         .design-option:hover {
             transform: scale(1.05);
         }
+
         .design-option img {
-            width: 120px;
+            width: 100px;
+            height: 140px;
+            object-fit: cover;
             border-radius: 10px;
             cursor: pointer;
-            transition: box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
+
         .design-option img:hover {
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked + img {
+            border: 3px solid #3498db;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+
         .canvas-container {
-            max-height: 80vh;
+            max-height: 60vh;
             overflow-y: auto;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             background-color: #f5f5f5;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            padding: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
+
         canvas {
             max-width: 100%;
+            max-height: 55vh;
             width: auto;
             height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
+            border-radius: 8px;
             display: block;
             margin: 0 auto;
         }
-        canvas:hover {
-            transform: scale(1.02);
+
+        input {
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
+
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+            outline: none;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
+            border-radius: 30px;
             transition: all 0.3s ease;
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
+            font-family: inherit;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            width: 100%;
         }
+
         .download-button {
-            background-color: #3498db;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
             color: white;
         }
+
         .download-button:hover {
-            background-color: #2980b9;
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #27ae60 0%, #219653 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
+
         .back-button {
-            background-color: #e74c3c;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
         }
+
         .back-button:hover {
-            background-color: #c0392b;
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #c0392b 0%, #a53124 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
+
+        #nextButton, #generateButton {
+            background: linear-gradient(135deg, #652c91 0%, #8e44ad 100%);
+            color: white;
+            margin-top: 20px;
+            padding: 14px 30px;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(101, 44, 145, 0.3);
+        }
+
+        #nextButton:hover, #generateButton:hover {
+            background: linear-gradient(135deg, #8e44ad 0%, #652c91 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(101, 44, 145, 0.4);
+        }
+
         .language-switch {
             position: fixed;
             top: 20px;
@@ -127,62 +260,36 @@
             background: #3498db;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 8px 15px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 30px;
             transition: all 0.3s ease;
             z-index: 100;
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
+            font-family: inherit;
+            font-size: 14px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
+
         .language-switch:hover {
             background: #2980b9;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15);
         }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 10px 0;
-            width: 80%;
-            transition: all 0.3s ease;
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
-            text-align: center;
-        }
-        input:focus {
-            border-color: #3498db;
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-            outline: none;
-        }
-        input[type="radio"] {
-            display: none;
-        }
-        input[type="radio"] + img {
-            border: 3px solid transparent;
-        }
-        input[type="radio"]:checked + img {
-            border: 3px solid #3498db;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
-        }
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
+
         .loading {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             display: none;
         }
+
         .loading-spinner {
             border: 5px solid #f3f3f3;
             border-top: 5px solid #3498db;
@@ -191,58 +298,22 @@
             height: 50px;
             animation: spin 1s linear infinite;
         }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        #nextButton, #generateButton {
-            padding: 12px 30px;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            border-radius: 50px;
-            margin-top: 20px;
-            transition: all 0.4s ease;
-            font-family: 'Suisse Intl Bold', Arial, sans-serif;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(135deg, #652c91 0%, #3498db 100%);
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        #nextButton:hover, #generateButton:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #652c91 0%, #2980b9 100%);
-        }
-        #nextButton:active, #generateButton:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        #nextButton::after, #generateButton::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        #nextButton:hover::after, #generateButton:hover::after {
-            opacity: 1;
-        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+
         .pulse-effect {
-            animation: pulse 0.5s ease;
+            animation: pulse 0.4s ease;
         }
+
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             20%, 60% { transform: translateX(-5px); }
@@ -258,9 +329,9 @@
     <button class="language-switch" onclick="toggleLanguage()">English</button>
     
     <div id="nameScreen" class="container active">
-        <img src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=200,height=200,onerror=redirect,format=auto/EZGZVA/2xJzsdzWIJJ3VJF2V0ZGPiREWvAZhgDlrQWm6Q2z.png" alt="شعار خزين" class="logo">
+        <img src="assets/images/logo.png" alt="شعار خزين" class="logo">
         <h2 id="nameTitle">🎉 أدخل اسمك 🎉</h2>
-        <input type="text" id="nameInput" placeholder="اكتب اسمك هنا" style="text-align: center;">
+        <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
         <button id="nextButton" onclick="goToDesignSelection()">التالي</button>
     </div>
     
@@ -268,24 +339,24 @@
         <h2 id="designTitle">🎨 اختر التصميم 🎨</h2>
         <div class="designs">
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des1.jpg" data-text-x="540" data-text-y="660">
-                <img src="assets/images/des1.jpg" onclick="selectDesign(this)">
+                <input type="radio" name="design" value="assets/images/des1.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des1.jpg" alt="تصميم 1" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des2.jpg" data-text-x="540" data-text-y="680">
-                <img src="https://i.ibb.co/wr84TKsS/des2.jpg" onclick="selectDesign(this)">
+                <input type="radio" name="design" value="assets/images/des2.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des2.jpg" alt="تصميم 2" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des3.jpg" data-text-x="540" data-text-y="700">
-                <img src="assets/images/des3.jpg" onclick="selectDesign(this)">
+                <input type="radio" name="design" value="assets/images/des3.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des3.jpg" alt="تصميم 3" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des4.jpg" data-text-x="540" data-text-y="650">
-                <img src="assets/images/des4.jpg" onclick="selectDesign(this)">
+                <input type="radio" name="design" value="assets/images/des4.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des4.jpg" alt="تصميم 4" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="assets/images/des5.jpg" data-text-x="540" data-text-y="690">
-                <img src="assets/images/des5.jpg" onclick="selectDesign(this)">
+                <input type="radio" name="design" value="assets/images/des5.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des5.jpg" alt="تصميم 5" loading="lazy">
             </label>
         </div>
         
@@ -297,7 +368,7 @@
             <canvas id="greetingCanvas"></canvas>
         </div>
         <div class="buttons-container">
-            <a id="downloadButton" class="button download-button" href="#" download="تهنئة.png">📥 تحميل التهنئة</a>
+            <a id="downloadButton" class="button download-button" href="#" download="تهنئة-عيد-الفطر.png">📥 تحميل التهنئة</a>
             <button class="button back-button" onclick="goBackToName()">🔄 تعديل الاسم</button>
             <button class="button back-button" onclick="goBackToDesign()">🎨 تغيير التصميم</button>
         </div>
@@ -320,7 +391,7 @@
 
         const texts = {
             arabic: {
-                pageTitle: "تهنئة رمضان | ويفز",
+                pageTitle: "تهنئة عيد الفطر | خزين",
                 nameTitle: "🎉 أدخل اسمك 🎉",
                 namePlaceholder: "اكتب اسمك هنا",
                 nextButton: "التالي",
@@ -332,22 +403,24 @@
                 switchToEnglish: "English"
             },
             english: {
-                pageTitle: "Ramadan Greeting | Waves",
+                pageTitle: "Eid Al-Fitr Greeting | Khazen",
                 nameTitle: "🎉 Enter Your Name 🎉",
-                namePlaceholder: "Enter your name here",
+                namePlaceholder: "Type your name here",
                 nextButton: "Next",
-                designTitle: "🎨 Choose a Design 🎨",
+                designTitle: "🎨 Choose Design 🎨",
                 generateButton: "Generate Greeting",
                 downloadButton: "📥 Download Greeting",
                 backToName: "🔄 Edit Name",
                 backToDesign: "🎨 Change Design",
-                switchToArabic: "عربي"
+                switchToArabic: "العربية"
             }
         };
 
         function toggleLanguage() {
             isArabic = !isArabic;
             const language = isArabic ? 'arabic' : 'english';
+            document.documentElement.lang = isArabic ? 'ar' : 'en';
+            document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
 
             document.getElementById("pageTitle").textContent = texts[language].pageTitle;
             document.getElementById("nameTitle").textContent = texts[language].nameTitle;
@@ -356,7 +429,7 @@
             document.getElementById("designTitle").textContent = texts[language].designTitle;
             document.getElementById("generateButton").textContent = texts[language].generateButton;
             document.getElementById("downloadButton").textContent = texts[language].downloadButton;
-            document.querySelector(".language-switch").textContent = isArabic ? texts[language].switchToEnglish : texts.arabic.switchToEnglish;
+            document.querySelector(".language-switch").textContent = isArabic ? texts[language].switchToEnglish : texts.arabic.switchToArabic;
         }
 
         function showLoading(show) {
@@ -380,98 +453,83 @@
                 if (newScreen === "resultScreen") {
                     setTimeout(() => {
                         const buttons = document.querySelector(".buttons-container");
-                        buttons.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'nearest'
-                        });
+                        buttons.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }, 100);
                 }
-            }, 500);
+            }, 400);
         }
 
         function goToDesignSelection() {
-            let name = document.getElementById("nameInput").value.trim();
-            if (name === "") {
-                alert(isArabic ? "يرجى إدخال الاسم أولاً!" : "Please enter your name first!");
-                
+            const name = document.getElementById("nameInput").value.trim();
+            if (!name) {
                 const input = document.getElementById("nameInput");
                 input.style.animation = "shake 0.5s";
-                setTimeout(() => {
-                    input.style.animation = "";
-                }, 500);
+                setTimeout(() => input.style.animation = "", 500);
                 
+                alert(isArabic ? "يرجى إدخال الاسم أولاً!" : "Please enter your name first!");
                 return;
             }
             
             const button = document.getElementById("nextButton");
             button.classList.add("pulse-effect");
-            setTimeout(() => {
-                button.classList.remove("pulse-effect");
-            }, 500);
+            setTimeout(() => button.classList.remove("pulse-effect"), 400);
             
             switchScreen("designScreen");
         }
 
         function selectDesign(imgElement) {
             const radio = imgElement.previousElementSibling;
-            radio.checked = true;
             selectedDesign = radio.value;
+            radio.checked = true;
             
             document.querySelectorAll('.design-option img').forEach(img => {
-                img.style.border = '3px solid transparent';
+                img.style.border = '2px solid transparent';
+                img.style.boxShadow = '0 3px 10px rgba(0,0,0,0.1)';
             });
             
             imgElement.style.border = '3px solid #3498db';
-            imgElement.style.boxShadow = '0 0 10px rgba(52, 152, 219, 0.7)';
+            imgElement.style.boxShadow = '0 0 15px rgba(52, 152, 219, 0.5)';
         }
 
         function generateCard() {
             if (!selectedDesign) {
-                alert(isArabic ? "يرجى اختيار تصميم أولاً!" : "Please choose a design first!");
-                
-                const designOptions = document.querySelectorAll('.design-option');
-                designOptions.forEach(option => {
+                document.querySelectorAll('.design-option').forEach(option => {
                     option.style.animation = "shake 0.5s";
-                    setTimeout(() => {
-                        option.style.animation = "";
-                    }, 500);
+                    setTimeout(() => option.style.animation = "", 500);
                 });
                 
+                alert(isArabic ? "يرجى اختيار تصميم أولاً!" : "Please choose a design first!");
                 return;
             }
             
             const button = document.getElementById("generateButton");
             button.classList.add("pulse-effect");
-            setTimeout(() => {
-                button.classList.remove("pulse-effect");
-            }, 500);
+            setTimeout(() => button.classList.remove("pulse-effect"), 400);
             
-            let name = document.getElementById("nameInput").value;
-            let canvas = document.getElementById("greetingCanvas");
-            let ctx = canvas.getContext("2d");
+            const name = document.getElementById("nameInput").value;
+            const canvas = document.getElementById("greetingCanvas");
+            const ctx = canvas.getContext("2d");
             
             showLoading(true);
             
-            let downloadCanvas = document.createElement('canvas');
-            let downloadCtx = downloadCanvas.getContext('2d');
-            
-            let img = new Image();
-            img.crossOrigin = "Anonymous";
-            img.src = selectedDesign + (selectedDesign.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+            const downloadCanvas = document.createElement('canvas');
+            const downloadCtx = downloadCanvas.getContext('2d');
+            const img = new Image();
             
             img.onload = function() {
                 try {
-                    const designSetting = designSettings[selectedDesign] || { x: 540, y: 660, fontSize: 36 };
+                    const designSetting = designSettings[selectedDesign];
                     
-                    // إعداد الكانفاس بنفس الأبعاد الأصلية
+                    // حساب الأبعاد للعرض
+                    const maxWidth = Math.min(originalImageWidth, window.innerWidth * 0.9);
+                    const scaleFactor = maxWidth / originalImageWidth;
+                    const displayHeight = originalImageHeight * scaleFactor;
+                    
+                    // إعداد كانفاس العرض
                     canvas.width = originalImageWidth;
                     canvas.height = originalImageHeight;
-                    
-                    // حساب حجم العرض مع الحفاظ على النسبة
-                    const maxDisplayHeight = window.innerHeight * 0.8;
-                    const scaleFactor = Math.min(1, maxDisplayHeight / originalImageHeight);
-                    canvas.style.width = (originalImageWidth * scaleFactor) + 'px';
-                    canvas.style.height = (originalImageHeight * scaleFactor) + 'px';
+                    canvas.style.width = `${maxWidth}px`;
+                    canvas.style.height = `${displayHeight}px`;
                     
                     // رسم الصورة والنص
                     ctx.imageSmoothingEnabled = true;
@@ -483,7 +541,7 @@
                     ctx.textBaseline = "middle";
                     ctx.fillText(name, designSetting.x, designSetting.y);
                     
-                    // إعداد صورة التحميل
+                    // إعداد كانفاس التحميل
                     downloadCanvas.width = originalImageWidth;
                     downloadCanvas.height = originalImageHeight;
                     downloadCtx.drawImage(img, 0, 0, originalImageWidth, originalImageHeight);
@@ -494,20 +552,22 @@
                     downloadCtx.textBaseline = "middle";
                     downloadCtx.fillText(name, designSetting.x, designSetting.y);
                     
-                    document.getElementById("downloadButton").href = downloadCanvas.toDataURL("image/png", 1.0);
+                    document.getElementById("downloadButton").href = downloadCanvas.toDataURL("image/png");
                     switchScreen("resultScreen");
                 } catch (error) {
-                    console.error("Error generating card:", error);
-                    alert(isArabic ? "حدث خطأ أثناء إنشاء التهنئة. يرجى المحاولة مرة أخرى." : "Error generating greeting. Please try again.");
+                    console.error("Error:", error);
+                    alert(isArabic ? "حدث خطأ أثناء إنشاء التهنئة" : "Error generating greeting");
                 } finally {
                     showLoading(false);
                 }
             };
             
             img.onerror = function() {
-                alert(isArabic ? "حدث خطأ في تحميل الصورة. يرجى المحاولة مرة أخرى." : "Error loading image. Please try again.");
                 showLoading(false);
+                alert(isArabic ? "حدث خطأ في تحميل الصورة" : "Error loading image");
             };
+            
+            img.src = selectedDesign;
         }
 
         function goBackToName() {
@@ -518,14 +578,28 @@
             switchScreen("designScreen");
         }
         
+        // تهيئة الأحداث
+        document.querySelectorAll('.design-option img').forEach(img => {
+            img.addEventListener('click', function() {
+                selectDesign(this);
+            });
+        });
+        
+        document.getElementById("nameInput").addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                goToDesignSelection();
+            }
+        });
+        
         window.addEventListener('resize', function() {
             if (currentScreen === "resultScreen" && selectedDesign) {
                 const canvas = document.getElementById("greetingCanvas");
-                const maxDisplayHeight = window.innerHeight * 0.8;
-                const scaleFactor = Math.min(1, maxDisplayHeight / originalImageHeight);
+                const maxWidth = Math.min(originalImageWidth, window.innerWidth * 0.9);
+                const scaleFactor = maxWidth / originalImageWidth;
+                const displayHeight = originalImageHeight * scaleFactor;
                 
-                canvas.style.width = (originalImageWidth * scaleFactor) + 'px';
-                canvas.style.height = (originalImageHeight * scaleFactor) + 'px';
+                canvas.style.width = `${maxWidth}px`;
+                canvas.style.height = `${displayHeight}px`;
             }
         });
     </script>
