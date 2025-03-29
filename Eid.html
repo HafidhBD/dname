@@ -268,24 +268,24 @@
         <h2 id="designTitle">🎨 اختر التصميم 🎨</h2>
         <div class="designs">
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/qM741k8R/des1.jpg" data-text-x="540" data-text-y="1110">
-                <img src="https://i.ibb.co/qM741k8R/des1.jpg" alt="تصميم 1">
+                <input type="radio" name="design" value="assets/images/des1.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des1.jpg" alt="تصميم 1" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/wr84TKsS/des2.jpg" data-text-x="540" data-text-y="1110">
-                <img src="https://i.ibb.co/wr84TKsS/des2.jpg" alt="تصميم 2">
+                <input type="radio" name="design" value="assets/images/des2.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des2.jpg" alt="تصميم 2" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/DDncyxJJ/des3.jpg" data-text-x="540" data-text-y="1110">
-                <img src="https://i.ibb.co/DDncyxJJ/des3.jpg" alt="تصميم 3">
+                <input type="radio" name="design" value="assets/images/des3.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des3.jpg" alt="تصميم 3" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/mCyXSZ4p/des4.jpg" data-text-x="540" data-text-y="1110">
-                <img src="https://i.ibb.co/mCyXSZ4p/des4.jpg" alt="تصميم 4">
+                <input type="radio" name="design" value="assets/images/des4.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des4.jpg" alt="تصميم 4" loading="lazy">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/GvXNW5sL/des5.jpg" data-text-x="540" data-text-y="1110">
-                <img src="https://i.ibb.co/GvXNW5sL/des5.jpg" alt="تصميم 5">
+                <input type="radio" name="design" value="assets/images/des5.jpg" data-text-x="540" data-text-y="1110">
+                <img src="assets/images/des5.jpg" alt="تصميم 5" loading="lazy">
             </label>
         </div>
         
@@ -311,11 +311,11 @@
         const originalImageHeight = 1459;
 
         const designSettings = {
-            "https://i.ibb.co/qM741k8R/des1.jpg": { x: 540, y: 1110, fontSize: 40 },
-            "https://i.ibb.co/wr84TKsS/des2.jpg": { x: 540, y: 1110, fontSize: 40 },
-            "https://i.ibb.co/DDncyxJJ/des3.jpg": { x: 540, y: 1110, fontSize: 40 },
-            "https://i.ibb.co/mCyXSZ4p/des4.jpg": { x: 540, y: 1110, fontSize: 40 },
-            "https://i.ibb.co/GvXNW5sL/des5.jpg": { x: 540, y: 1110, fontSize: 40 }
+            "assets/images/des1.jpg": { x: 540, y: 1110, fontSize: 40 },
+            "assets/images/des2.jpg": { x: 540, y: 1110, fontSize: 40 },
+            "assets/images/des3.jpg": { x: 540, y: 1110, fontSize: 40 },
+            "assets/images/des4.jpg": { x: 540, y: 1110, fontSize: 40 },
+            "assets/images/des5.jpg": { x: 540, y: 1110, fontSize: 40 }
         };
 
         const texts = {
@@ -471,7 +471,7 @@
                 switchScreen("resultScreen");
             } catch (error) {
                 console.error("Error generating card:", error);
-                alert(isArabic ? "حدث خطأ أثناء إنشاء التهنئة" : "Error generating greeting");
+                alert(isArabic ? "حدث خطأ أثناء إنشاء التهنئة. تأكد من أن الصور موجودة في المسار الصحيح." : "Error generating greeting. Please check if images are in correct path.");
             } finally {
                 showLoading(false);
             }
@@ -480,15 +480,22 @@
         function loadImage(src) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
-                img.crossOrigin = "Anonymous";
+                
+                // حل خاص للصور المحلية
+                if (src.startsWith('assets/')) {
+                    // إنشاء مسار مطلق للصورة
+                    const baseUrl = window.location.href.replace(/\/[^/]*$/, '');
+                    img.src = baseUrl + '/' + src;
+                } else {
+                    img.crossOrigin = "Anonymous";
+                    img.src = src + (src.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+                }
                 
                 img.onload = () => resolve(img);
                 img.onerror = () => {
                     console.error("Failed to load image:", src);
                     reject(new Error(isArabic ? "تعذر تحميل الصورة" : "Failed to load image"));
                 };
-                
-                img.src = src + (src.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
             });
         }
 
