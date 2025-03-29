@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,16 +70,24 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         .canvas-container {
-            max-height: 60vh;
+            max-height: 80vh;
             overflow-y: auto;
             margin-bottom: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         canvas {
             max-width: 100%;
+            width: auto;
+            height: auto;
             border-radius: 10px;
             transition: transform 0.3s ease;
+            display: block;
+            margin: 0 auto;
         }
         canvas:hover {
             transform: scale(1.02);
@@ -139,6 +147,7 @@
             width: 80%;
             transition: all 0.3s ease;
             font-family: 'Suisse Intl Bold', Arial, sans-serif;
+            text-align: center;
         }
         input:focus {
             border-color: #3498db;
@@ -186,8 +195,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* تحسينات الأزرار الجديدة */
         #nextButton, #generateButton {
             padding: 12px 30px;
             font-size: 18px;
@@ -205,18 +212,15 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         #nextButton:hover, #generateButton:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             background: linear-gradient(135deg, #652c91 0%, #2980b9 100%);
         }
-
         #nextButton:active, #generateButton:active {
             transform: translateY(1px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-
         #nextButton::after, #generateButton::after {
             content: "";
             position: absolute;
@@ -228,23 +232,17 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
         #nextButton:hover::after, #generateButton:hover::after {
             opacity: 1;
         }
-
-        /* تأثير النبض عند النقر */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
         .pulse-effect {
             animation: pulse 0.5s ease;
         }
-
-        /* تأثير اهتزاز عند الخطأ */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             20%, 60% { transform: translateX(-5px); }
@@ -262,7 +260,7 @@
     <div id="nameScreen" class="container active">
         <img src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=200,height=200,onerror=redirect,format=auto/EZGZVA/2xJzsdzWIJJ3VJF2V0ZGPiREWvAZhgDlrQWm6Q2z.png" alt="شعار خزين" class="logo">
         <h2 id="nameTitle">🎉 أدخل اسمك 🎉</h2>
-        <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
+        <input type="text" id="nameInput" placeholder="اكتب اسمك هنا" style="text-align: center;">
         <button id="nextButton" onclick="goToDesignSelection()">التالي</button>
     </div>
     
@@ -270,26 +268,27 @@
         <h2 id="designTitle">🎨 اختر التصميم 🎨</h2>
         <div class="designs">
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/qM741k8R/des1.jpg">
+                <input type="radio" name="design" value="https://i.ibb.co/qM741k8R/des1.jpg" data-text-x="540" data-text-y="660">
                 <img src="https://i.ibb.co/qM741k8R/des1.jpg" onclick="selectDesign(this)">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/wr84TKsS/des2.jpg">
+                <input type="radio" name="design" value="https://i.ibb.co/wr84TKsS/des2.jpg" data-text-x="540" data-text-y="680">
                 <img src="https://i.ibb.co/wr84TKsS/des2.jpg" onclick="selectDesign(this)">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/DDncyxJJ/des3.jpg">
+                <input type="radio" name="design" value="https://i.ibb.co/DDncyxJJ/des3.jpg" data-text-x="540" data-text-y="700">
                 <img src="https://i.ibb.co/DDncyxJJ/des3.jpg" onclick="selectDesign(this)">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/mCyXSZ4p/des4.jpg">
+                <input type="radio" name="design" value="https://i.ibb.co/mCyXSZ4p/des4.jpg" data-text-x="540" data-text-y="650">
                 <img src="https://i.ibb.co/mCyXSZ4p/des4.jpg" onclick="selectDesign(this)">
             </label>
             <label class="design-option">
-                <input type="radio" name="design" value="https://i.ibb.co/GvXNW5sL/des5.jpg">
+                <input type="radio" name="design" value="https://i.ibb.co/GvXNW5sL/des5.jpg" data-text-x="540" data-text-y="690">
                 <img src="https://i.ibb.co/GvXNW5sL/des5.jpg" onclick="selectDesign(this)">
             </label>
         </div>
+        
         <button id="generateButton" onclick="generateCard()">إنشاء التهنئة</button>
     </div>
     
@@ -308,6 +307,16 @@
         let selectedDesign = "";
         let isArabic = true;
         let currentScreen = "nameScreen";
+        const originalImageWidth = 1080;
+        const originalImageHeight = 1459;
+
+        const designSettings = {
+            "https://i.ibb.co/qM741k8R/des1.jpg": { x: 540, y: 660, fontSize: 36 },
+            "https://i.ibb.co/wr84TKsS/des2.jpg": { x: 540, y: 680, fontSize: 36 },
+            "https://i.ibb.co/DDncyxJJ/des3.jpg": { x: 540, y: 700, fontSize: 36 },
+            "https://i.ibb.co/mCyXSZ4p/des4.jpg": { x: 540, y: 650, fontSize: 36 },
+            "https://i.ibb.co/GvXNW5sL/des5.jpg": { x: 540, y: 1110, fontSize: 40 }
+        };
 
         const texts = {
             arabic: {
@@ -347,7 +356,7 @@
             document.getElementById("designTitle").textContent = texts[language].designTitle;
             document.getElementById("generateButton").textContent = texts[language].generateButton;
             document.getElementById("downloadButton").textContent = texts[language].downloadButton;
-            document.querySelector(".language-switch").textContent = isArabic ? texts[language].switchToArabic : texts.arabic.switchToEnglish;
+            document.querySelector(".language-switch").textContent = isArabic ? texts[language].switchToEnglish : texts.arabic.switchToEnglish;
         }
 
         function showLoading(show) {
@@ -385,7 +394,6 @@
             if (name === "") {
                 alert(isArabic ? "يرجى إدخال الاسم أولاً!" : "Please enter your name first!");
                 
-                // تأثير اهتزاز عند إدخال غير صحيح
                 const input = document.getElementById("nameInput");
                 input.style.animation = "shake 0.5s";
                 setTimeout(() => {
@@ -395,7 +403,6 @@
                 return;
             }
             
-            // إضافة تأثير النبض عند النقر
             const button = document.getElementById("nextButton");
             button.classList.add("pulse-effect");
             setTimeout(() => {
@@ -422,7 +429,6 @@
             if (!selectedDesign) {
                 alert(isArabic ? "يرجى اختيار تصميم أولاً!" : "Please choose a design first!");
                 
-                // تأثير اهتزاز عند عدم اختيار تصميم
                 const designOptions = document.querySelectorAll('.design-option');
                 designOptions.forEach(option => {
                     option.style.animation = "shake 0.5s";
@@ -434,7 +440,6 @@
                 return;
             }
             
-            // إضافة تأثير النبض عند النقر
             const button = document.getElementById("generateButton");
             button.classList.add("pulse-effect");
             setTimeout(() => {
@@ -445,56 +450,51 @@
             let canvas = document.getElementById("greetingCanvas");
             let ctx = canvas.getContext("2d");
             
-            // إظهار مؤشر التحميل
             showLoading(true);
             
-            // إنشاء كانفاس للتحميل بالجودة الأصلية
             let downloadCanvas = document.createElement('canvas');
             let downloadCtx = downloadCanvas.getContext('2d');
             
             let img = new Image();
             img.crossOrigin = "Anonymous";
-            
-            // إضافة معلمة عشوائية لمنع الكاش
             img.src = selectedDesign + (selectedDesign.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
             
             img.onload = function() {
                 try {
-                    // 1. إعداد الكانفاس للعرض
-                    const maxCanvasHeight = window.innerHeight * 0.6;
-                    const scaleFactor = Math.min(1, maxCanvasHeight / img.height);
+                    const designSetting = designSettings[selectedDesign] || { x: 540, y: 660, fontSize: 36 };
                     
-                    canvas.width = img.width * scaleFactor;
-                    canvas.height = img.height * scaleFactor;
+                    // إعداد الكانفاس بنفس الأبعاد الأصلية
+                    canvas.width = originalImageWidth;
+                    canvas.height = originalImageHeight;
                     
+                    // حساب حجم العرض مع الحفاظ على النسبة
+                    const maxDisplayHeight = window.innerHeight * 0.8;
+                    const scaleFactor = Math.min(1, maxDisplayHeight / originalImageHeight);
+                    canvas.style.width = (originalImageWidth * scaleFactor) + 'px';
+                    canvas.style.height = (originalImageHeight * scaleFactor) + 'px';
+                    
+                    // رسم الصورة والنص
                     ctx.imageSmoothingEnabled = true;
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                     
-                    // إضافة النص للعرض
-                    const fontSize = 28 * scaleFactor;
-                    ctx.font = `bold ${fontSize}px Arial, sans-serif`;
+                    ctx.font = `bold ${designSetting.fontSize}px Arial, sans-serif`;
                     ctx.fillStyle = "#FFFFFF";
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
-                    const textY = 660 * (canvas.height / img.height);
-                    ctx.fillText(name, canvas.width / 2, textY);
+                    ctx.fillText(name, designSetting.x, designSetting.y);
                     
-                    // 2. إعداد الكانفاس للتحميل (بالجودة الأصلية)
-                    downloadCanvas.width = img.width;
-                    downloadCanvas.height = img.height;
-                    downloadCtx.drawImage(img, 0, 0);
+                    // إعداد صورة التحميل
+                    downloadCanvas.width = originalImageWidth;
+                    downloadCanvas.height = originalImageHeight;
+                    downloadCtx.drawImage(img, 0, 0, originalImageWidth, originalImageHeight);
                     
-                    // إضافة النص للتحميل
-                    downloadCtx.font = 'bold 28px Arial, sans-serif';
+                    downloadCtx.font = `bold ${designSetting.fontSize}px Arial, sans-serif`;
                     downloadCtx.fillStyle = "#FFFFFF";
                     downloadCtx.textAlign = "center";
                     downloadCtx.textBaseline = "middle";
-                    downloadCtx.fillText(name, downloadCanvas.width / 2, 660);
+                    downloadCtx.fillText(name, designSetting.x, designSetting.y);
                     
-                    // تعيين رابط التحميل
                     document.getElementById("downloadButton").href = downloadCanvas.toDataURL("image/png", 1.0);
-                    
-                    // الانتقال لشاشة النتيجة
                     switchScreen("resultScreen");
                 } catch (error) {
                     console.error("Error generating card:", error);
@@ -521,29 +521,11 @@
         window.addEventListener('resize', function() {
             if (currentScreen === "resultScreen" && selectedDesign) {
                 const canvas = document.getElementById("greetingCanvas");
-                const img = new Image();
-                img.src = selectedDesign;
-                img.onload = function() {
-                    const maxCanvasHeight = window.innerHeight * 0.6;
-                    const scaleFactor = Math.min(1, maxCanvasHeight / img.height);
-                    
-                    canvas.width = img.width * scaleFactor;
-                    canvas.height = img.height * scaleFactor;
-                    
-                    const ctx = canvas.getContext("2d");
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    
-                    const fontSize = 36 * scaleFactor;
-                    ctx.font = `bold ${fontSize}px 'Suisse Intl Bold', Arial, sans-serif`;
-                    ctx.fillStyle = "#FFFFFF";
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "middle";
-
-                    
-                    const textY = 990 * (canvas.height / img.height);
-                    const name = document.getElementById("nameInput").value;
-                    ctx.fillText(name, canvas.width / 2, textY);
-                };
+                const maxDisplayHeight = window.innerHeight * 0.8;
+                const scaleFactor = Math.min(1, maxDisplayHeight / originalImageHeight);
+                
+                canvas.style.width = (originalImageWidth * scaleFactor) + 'px';
+                canvas.style.height = (originalImageHeight * scaleFactor) + 'px';
             }
         });
     </script>
