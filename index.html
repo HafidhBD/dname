@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تهنئة عيد الأضحى | خزين</title>
+    <link href="https://khazeen.com.sa/wwwroot/assets/icons/khazeen%20(3).png" rel="icon" sizes="32x32" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #7029bd;
+            --primary-light: #0164fe;
+            --secondary-color: #00d28c;
+            --accent-color: #e74c3c;
+            --accent-dark: #c0392b;
+            --text-color: #333;
+            --light-color: #fff;
+            --light-gray: #f5f5f5;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            --twitter-color: #1DA1F2;
+            --whatsapp-color: #25D366;
+            --facebook-color: #1877F2;
+            --telegram-color: #0088cc;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        @font-face {
+            font-family: 'Frutiger LT Arabic';
+            src: url('SuisseIntl-Light.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body {
+            font-family: 'Frutiger LT Arabic', Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: var(--light-color);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .language-switcher {
+            position: fixed;
+            top: 1rem;
+            left: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        body[dir="ltr"] .language-switcher {
+            left: auto;
+            right: 0;
+        }
+        
+        .language-switcher:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .language-switcher i {
+            font-size: 1rem;
+        }
+        
+        .logo {
+            max-width: 350px;
+            height: auto;
+            margin: 1.5rem auto 0;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.8rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 0.8rem;
+            font-weight: 700;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 130px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #e8dbda);
+            border-radius: 4px;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        body[dir="rtl"] .input-group {
+            text-align: right;
+        }
+        
+        body[dir="ltr"] .input-group {
+            text-align: left;
+        }
+        
+        .input-container {
+            position: relative;
+            margin-bottom: 1.2rem;
+        }
+        
+        .input-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+        
+        body[dir="rtl"] .input-container label {
+            text-align: right;
+            padding-right: 1.8rem;
+            padding-left: 0;
+        }
+        
+        body[dir="ltr"] .input-container label {
+            text-align: left;
+            padding-left: 1.8rem;
+            padding-right: 0;
+        }
+        
+        body[dir="rtl"] .input-container.ar-label::after {
+            right: 0;
+            left: auto;
+        }
+        
+        body[dir="ltr"] .input-container.ar-label::after {
+            left: 0;
+            right: auto;
+        }
+        
+        .input-container.ar-label:hover::after {
+            width: 100%;
+        }
+        
+        input {
+            padding: 1rem 1.2rem;
+            font-size: 1rem;
+            width: 100%;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Frutiger LT Arabic', Arial, sans-serif;
+            background-color: var(--light-gray);
+            transition: var(--transition);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        body[dir="rtl"] #nameInputAr,
+        body[dir="ltr"] #nameInputEn {
+            text-align: right;
+        }
+        
+        body[dir="rtl"] #nameInputEn,
+        body[dir="ltr"] #nameInputAr {
+            text-align: left;
+        }
+        
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            background-color: var(--light-color);
+            box-shadow: 0 0 0 3px rgba(101, 44, 145, 0.2);
+        }
+        
+        input::placeholder {
+            color: #999;
+            opacity: 1;
+        }
+        
+        /* تصميمات جديدة لاختيار التصميم */
+        .design-selection {
+            display: none;
+            margin: 2rem 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .design-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .design-options {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .design-option {
+            height: 150px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: var(--shadow);
+            border: 3px solid transparent;
+        }
+        
+        .design-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .design-option.selected {
+            border-color: var(--primary-color);
+        }
+        
+        .design-option img {
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .design-option .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .design-option:hover .overlay {
+            opacity: 1;
+        }
+        
+        .design-option.selected .overlay {
+            background: rgba(112, 41, 189, 0.6);
+            opacity: 1;
+        }
+        
+        .button-container {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Frutiger LT Arabic', Arial, sans-serif;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+        }
+        
+        button.secondary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            box-shadow: 0 4px 8px rgba(101, 44, 145, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+        }
+        
+        button.secondary:hover {
+            box-shadow: 0 6px 15px rgba(101, 44, 145, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .spinner {
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(217, 83, 79, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .result-container {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success-message {
+            background-color: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+        }
+        
+        canvas {
+            margin: 1.5rem auto;
+            border-radius: 15px;
+            max-width: 100%;
+            display: none;
+            border: 1px solid #eee;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        canvas:hover {
+            transform: scale(1.02);
+        }
+        
+        .download-share-container {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        #downloadButton {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-family: 'Frutiger LT Arabic', Arial, sans-serif;
+            transition: var(--transition);
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(101, 44, 145, 0.3);
+            width: fit-content;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        #downloadButton:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(101, 44, 145, 0.4);
+        }
+        
+        .share-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .share-title {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .twitter { background-color: var(--twitter-color); }
+        .whatsapp { background-color: var(--whatsapp-color); }
+        .facebook { background-color: var(--facebook-color); }
+        .telegram { background-color: var(--telegram-color); }
+        
+        /* إضافة أنماط للوضع الإنجليزي */
+        body[dir="ltr"] {
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            button, #downloadButton {
+                padding: 0.9rem 1.5rem;
+                font-size: 1rem;
+                min-width: 180px;
+            }
+            
+            .logo {
+                max-width: 350px;
+            }
+            
+            .social-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .language-switcher {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .design-options {
+                align-items: center;
+            }
+            
+            .design-option {
+                max-width: 300px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <button class="language-switcher" id="languageSwitcher">
+                <i class="fas fa-language"></i>
+                <span>English</span>
+            </button>
+            <img alt="شعار ويفز" class="logo" src="https://i.ibb.co/s90n8rCD/image.gif" />
+        </div>
+        
+        <h2 id="mainHeading">عيد أضحى مبارك | Happy Eid </h2>
+        
+        <!-- مرحلة إدخال الاسم -->
+        <div class="input-group" id="nameInputGroup">
+            <div class="input-container ar-label">
+                <label for="nameInputAr" id="arabicNameLabel">الاسم باللغة العربية</label>
+                <input id="nameInputAr" placeholder="اكتب اسمك هنا..." type="text" />
+            </div>
+            
+            <div class="input-container">
+                <label for="nameInputEn" id="englishNameLabel">الاسم باللغة الإنجليزية</label>
+                <input id="nameInputEn" placeholder="Enter your name here..." type="text" />
+            </div>
+        </div>
+        
+        <!-- مرحلة اختيار التصميم -->
+        <div class="design-selection" id="designSelection">
+            <div class="design-title" id="designTitle">اختر تصميم التهنئة</div>
+            <div class="design-options">
+                <div class="design-option" data-design="1">
+                    <img src="https://i.ibb.co/qMk5knsR/1-copy.jpg" alt="تصميم 1">
+                    <div class="overlay">التصميم الأول</div>
+                </div>
+                <div class="design-option" data-design="2">
+                    <img src="https://i.ibb.co/R5VfZSR/copy.jpg" alt="تصميم 2">
+                    <div class="overlay">التصميم الثاني</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button id="nextButton" class="secondary">
+                <span id="nextButtonText">التالي</span>
+                <span>→</span>
+            </button>
+            <button id="generateButton" style="display: none;">
+                <span id="generateButtonText">إنشاء التهنئة</span>
+                <span>🎨</span>
+            </button>
+            <button id="backButton" class="secondary" style="display: none;">
+                <span>←</span>
+                <span id="backButtonText">رجوع</span>
+            </button>
+        </div>
+        
+        <div class="loading" id="loadingText">
+            <div class="spinner"></div>
+            <span id="loadingTextSpan">جاري إنشاء التهنئة، الرجاء الانتظار...</span>
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="success-message">
+                <span>✓</span>
+                <span id="successMessage">تم إنشاء تهنئتك بنجاح!</span>
+            </div>
+            
+            <canvas id="greetingCanvas"></canvas>
+            
+            <div class="download-share-container" id="downloadShareContainer">
+                <a download="تهنئة-عيد-الأضحى.png" href="#" id="downloadButton">
+                    <span>📥</span>
+                    <span id="downloadButtonText">تحميل التهنئة</span>
+                </a>
+                
+                <div class="share-section">
+                    <div class="share-title" id="shareTitle">مشاركة التهنئة:</div>
+                    <div class="social-share">
+                        <a href="#" class="social-btn twitter" id="twitterShare"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn whatsapp" id="whatsappShare"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-btn facebook" id="facebookShare"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn telegram" id="telegramShare"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // العناصر الرئيسية
+            const nameInputAr = document.getElementById('nameInputAr');
+            const nameInputEn = document.getElementById('nameInputEn');
+            const nameInputGroup = document.getElementById('nameInputGroup');
+            const designSelection = document.getElementById('designSelection');
+            const nextButton = document.getElementById('nextButton');
+            const backButton = document.getElementById('backButton');
+            const generateButton = document.getElementById('generateButton');
+            const loadingText = document.getElementById('loadingText');
+            const resultContainer = document.getElementById('resultContainer');
+            const canvas = document.getElementById('greetingCanvas');
+            const downloadShareContainer = document.getElementById('downloadShareContainer');
+            const downloadButton = document.getElementById('downloadButton');
+            const ctx = canvas.getContext('2d');
+            const designOptions = document.querySelectorAll('.design-option');
+            
+            // عناصر المشاركة الاجتماعية
+            const twitterShare = document.getElementById('twitterShare');
+            const whatsappShare = document.getElementById('whatsappShare');
+            const facebookShare = document.getElementById('facebookShare');
+            const telegramShare = document.getElementById('telegramShare');
+            
+            // عناصر تبديل اللغة
+            const languageSwitcher = document.getElementById('languageSwitcher');
+            const htmlElement = document.documentElement;
+            
+            // متغيرات التطبيق
+            let selectedDesign = null;
+            const designImages = {
+                '1': 'https://i.ibb.co/qMk5knsR/1-copy.jpg',
+                '2': 'https://i.ibb.co/R5VfZSR/copy.jpg'
+            };
+            
+            // إعدادات الخط لكل تصميم
+            const nameStyles = {
+                '1': { 
+                    ar: { 
+                        y: 870, 
+                        size: 46,
+                        color: "#ffffff",  // لون الخط للاسم العربي
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم العربي
+                        weight: "normal",   // سماكة الخط
+
+                    },
+                    en: { 
+                        y: 930, 
+                        size: 40,
+                        color: "#ffffff",  // لون الخط للاسم الإنجليزي
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم الإنجليزي
+                        weight: "normal",    // سماكة الخط
+                    }
+                },
+                '2': { 
+                    ar: { 
+                        y: 850, 
+                        size: 46,
+                        color: "#132730",  // لون الخط للاسم العربي
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم العربي
+                        weight: "normal",    // سماكة الخط
+                    },
+                    en: { 
+                        y: 920, 
+                        size: 40,
+                        color: "#132730",  // لون الخط للاسم الإنجليزي
+                        font: "'Frutiger LT Arabic', Arial, sans-serif",  // خط الاسم الإنجليزي
+                        weight: "normal",  // سماكة الخط
+
+                    }
+                }
+            };
+            
+            // نصوص للغة العربية
+            const arabicTexts = {
+                heading: "عيد أضحى مبارك | Happy Eid",
+                arabicLabel: "الاسم باللغة العربية",
+                arabicPlaceholder: "اكتب اسمك هنا...",
+                englishLabel: "الاسم باللغة الإنجليزية",
+                englishPlaceholder: "Enter your name here...",
+                designTitle: "اختر تصميم التهنئة",
+                nextButton: "التالي",
+                backButton: "رجوع",
+                generateButton: "إنشاء التهنئة",
+                loadingText: "جاري إنشاء التهنئة، الرجاء الانتظار...",
+                successMessage: "تم إنشاء تهنئتك بنجاح!",
+                downloadButton: "تحميل التهنئة",
+                shareTitle: "مشاركة التهنئة:",
+                switchToEnglish: "English",
+                switchToArabic: "العربية"
+            };
+            
+            // نصوص للغة الإنجليزية
+            const englishTexts = {
+                heading: "عيد أضحى مبارك | Happy Eid",
+                arabicLabel: "Name in Arabic",
+                arabicPlaceholder: "Write your name in Arabic...",
+                englishLabel: "Name in English",
+                englishPlaceholder: "Write your name here...",
+                designTitle: "Choose Greeting Design",
+                nextButton: "Next",
+                backButton: "Back",
+                generateButton: "Generate Greeting",
+                loadingText: "Generating your greeting, please wait...",
+                successMessage: "Your greeting has been created successfully!",
+                downloadButton: "Download Greeting",
+                shareTitle: "Share Greeting:",
+                switchToEnglish: "English",
+                switchToArabic: "العربية"
+            };
+            
+            // دالة لتحميل الخط
+            async function loadFont() {
+                try {
+                    if (document.fonts.check('16px "Frutiger LT Arabic"')) {
+                        return true;
+                    }
+                    
+                    const font = new FontFace('Frutiger LT Arabic', 'url(FrutigerLTArabic-Roman.ttf)');
+                    await font.load();
+                    document.fonts.add(font);
+                    return true;
+                } catch (error) {
+                    console.error('خطأ في تحميل الخط:', error);
+                    return false;
+                }
+            }
+            
+            // دالة تبديل اللغة
+            function toggleLanguage() {
+                const isArabic = htmlElement.getAttribute('dir') === 'rtl';
+                
+                if (isArabic) {
+                    // التبديل إلى الإنجليزية
+                    htmlElement.setAttribute('dir', 'ltr');
+                    htmlElement.setAttribute('lang', 'en');
+                    languageSwitcher.innerHTML = `<i class="fas fa-language"></i><span>${arabicTexts.switchToArabic}</span>`;
+                    
+                    // تحديث النصوص
+                    updateTexts(englishTexts);
+                    
+                    // ضبط اتجاه النص للحقول
+                    nameInputAr.style.textAlign = 'right';
+                    nameInputEn.style.textAlign = 'left';
+                } else {
+                    // التبديل إلى العربية
+                    htmlElement.setAttribute('dir', 'rtl');
+                    htmlElement.setAttribute('lang', 'ar');
+                    languageSwitcher.innerHTML = `<i class="fas fa-language"></i><span>${englishTexts.switchToEnglish}</span>`;
+                    
+                    // تحديث النصوص
+                    updateTexts(arabicTexts);
+                    
+                    // ضبط اتجاه النص للحقول
+                    nameInputAr.style.textAlign = 'right';
+                    nameInputEn.style.textAlign = 'left';
+                }
+            }
+            
+            // دالة لتحديث النصوص حسب اللغة
+            function updateTexts(texts) {
+                document.getElementById('mainHeading').textContent = texts.heading;
+                document.getElementById('arabicNameLabel').textContent = texts.arabicLabel;
+                document.getElementById('nameInputAr').placeholder = texts.arabicPlaceholder;
+                document.getElementById('englishNameLabel').textContent = texts.englishLabel;
+                document.getElementById('nameInputEn').placeholder = texts.englishPlaceholder;
+                document.getElementById('designTitle').textContent = texts.designTitle;
+                document.getElementById('nextButtonText').textContent = texts.nextButton;
+                document.getElementById('backButtonText').textContent = texts.backButton;
+                document.getElementById('generateButtonText').textContent = texts.generateButton;
+                document.getElementById('loadingTextSpan').textContent = texts.loadingText;
+                document.getElementById('successMessage').textContent = texts.successMessage;
+                document.getElementById('downloadButtonText').textContent = texts.downloadButton;
+                document.getElementById('shareTitle').textContent = texts.shareTitle;
+            }
+            
+            // دالة للانتقال إلى مرحلة اختيار التصميم
+            function goToDesignSelection() {
+                const nameAr = nameInputAr.value.trim();
+                const nameEn = nameInputEn.value.trim();
+                
+                if (!nameAr && !nameEn) {
+                    showError(htmlElement.getAttribute('dir') === 'rtl' ? 
+                        'الرجاء إدخال الاسم على الأقل في أحد الحقلين' : 
+                        'Please enter your name in at least one field');
+                    nameInputAr.focus();
+                    return;
+                }
+                
+                nameInputGroup.style.display = 'none';
+                designSelection.style.display = 'block';
+                nextButton.style.display = 'none';
+                generateButton.style.display = 'inline-flex';
+                backButton.style.display = 'inline-flex';
+                
+                // التمرير إلى الأعلى لنرى خيارات التصميم
+                setTimeout(() => {
+                    designSelection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+            
+            // دالة للرجوع إلى مرحلة إدخال الاسم
+            function goBackToNameInput() {
+                nameInputGroup.style.display = 'block';
+                designSelection.style.display = 'none';
+                nextButton.style.display = 'inline-flex';
+                generateButton.style.display = 'none';
+                backButton.style.display = 'none';
+                
+                // إلغاء تحديد أي تصميم
+                designOptions.forEach(option => option.classList.remove('selected'));
+                selectedDesign = null;
+                
+                // التمرير إلى الأعلى لنرى حقول الإدخال
+                setTimeout(() => {
+                    nameInputGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+            
+            // دالة إنشاء البطاقة
+            async function generateCard() {
+                if (!selectedDesign) {
+                    showError(htmlElement.getAttribute('dir') === 'rtl' ? 
+                        'الرجاء اختيار تصميم للتهنئة' : 
+                        'Please select a design for the greeting');
+                    return;
+                }
+                
+                const nameAr = nameInputAr.value.trim();
+                const nameEn = nameInputEn.value.trim();
+                
+                // إظهار حالة التحميل
+                loadingText.style.display = "flex";
+                resultContainer.style.display = "none";
+                canvas.style.display = "none";
+                downloadShareContainer.style.display = "none";
+                
+                try {
+                    // تحميل الخط
+                    const fontLoaded = await loadFont();
+                    
+                    // إنشاء الصورة
+                    const img = new Image();
+                    img.crossOrigin = "anonymous";
+                    img.src = designImages[selectedDesign];
+                    
+                    await new Promise((resolve, reject) => {
+                        img.onload = resolve;
+                        img.onerror = () => reject(new Error('فشل تحميل الصورة'));
+                    });
+                    
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    
+                    // استخدام الإعدادات المخصصة للتصميم المختار
+                    const styles = nameStyles[selectedDesign];
+                    
+                    // كتابة الاسم العربي
+                    if (nameAr) {
+                        ctx.font = `${styles.ar.weight} ${styles.ar.size}px ${styles.ar.font}`;
+                        ctx.fillStyle = styles.ar.color;
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "middle";
+                        
+                        // تطبيق تأثير الظل إذا موجود
+                        if (styles.ar.shadow) {
+                            ctx.shadowColor = styles.ar.shadow.color;
+                            ctx.shadowBlur = styles.ar.shadow.blur;
+                            ctx.shadowOffsetX = styles.ar.shadow.offsetX;
+                            ctx.shadowOffsetY = styles.ar.shadow.offsetY;
+                        }
+                        
+                        ctx.fillText(nameAr, canvas.width / 2, styles.ar.y);
+                        
+                        // إعادة تعيين إعدادات الظل
+                        ctx.shadowColor = 'transparent';
+                        ctx.shadowBlur = 0;
+                    }
+                    
+                    // كتابة الاسم الإنجليزي
+                    if (nameEn) {
+                        ctx.font = `${styles.en.weight} ${styles.en.size}px ${styles.en.font}`;
+                        ctx.fillStyle = styles.en.color;
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "middle";
+                        
+                        // تطبيق تأثير الظل إذا موجود
+                        if (styles.en.shadow) {
+                            ctx.shadowColor = styles.en.shadow.color;
+                            ctx.shadowBlur = styles.en.shadow.blur;
+                            ctx.shadowOffsetX = styles.en.shadow.offsetX;
+                            ctx.shadowOffsetY = styles.en.shadow.offsetY;
+                        }
+                        
+                        ctx.fillText(nameEn, canvas.width / 2, styles.en.y);
+                        
+                        // إعادة تعيين إعدادات الظل
+                        ctx.shadowColor = 'transparent';
+                        ctx.shadowBlur = 0;
+                    }
+                    
+                    // إعداد روابط المشاركة
+                    setupShareLinks(nameAr || nameEn);
+                    
+                    // إظهار النتيجة
+                    canvas.style.display = "block";
+                    downloadButton.href = canvas.toDataURL('image/png');
+                    downloadShareContainer.style.display = "flex";
+                    resultContainer.style.display = "block";
+                    
+                    // التمرير إلى النتيجة
+                    setTimeout(() => {
+                        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                } catch (error) {
+                    console.error('حدث خطأ:', error);
+                    showError(htmlElement.getAttribute('dir') === 'rtl' ? 
+                        'حدث خطأ أثناء إنشاء التهنئة. الرجاء المحاولة مرة أخرى.' : 
+                        'An error occurred while generating the greeting. Please try again.');
+                } finally {
+                    loadingText.style.display = "none";
+                }
+            }
+            
+            // دالة لإعداد روابط المشاركة
+            function setupShareLinks(name) {
+                const imageDataUrl = canvas.toDataURL('image/png');
+                const isArabic = htmlElement.getAttribute('dir') === 'rtl';
+                const shareText = isArabic ? 
+                    `تهنئة عيد أضحى مبارك من ${name} عبر خزين! 🎉` : 
+                    `Happy Eid Al-Adha greetings from ${name} via Khazeen! 🎉`;
+                const shareUrl = window.location.href;
+                
+                // تويتر
+                twitterShare.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+                
+                // واتساب
+                whatsappShare.href = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+                
+                // فيسبوك
+                facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                
+                // تليجرام
+                telegramShare.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+                
+                // فتح النوافذ في صفحة جديدة
+                [twitterShare, whatsappShare, facebookShare, telegramShare].forEach(btn => {
+                    btn.target = '_blank';
+                    btn.rel = 'noopener noreferrer';
+                });
+            }
+            
+            // دالة لعرض رسالة الخطأ
+            function showError(message) {
+                const errorElement = document.createElement('div');
+                errorElement.className = 'success-message';
+                errorElement.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+                errorElement.style.color = 'var(--accent-color)';
+                errorElement.innerHTML = `<span>✕</span><span>${message}</span>`;
+                
+                const buttonContainer = document.querySelector('.button-container');
+                buttonContainer.appendChild(errorElement);
+                
+                setTimeout(() => {
+                    errorElement.style.opacity = '0';
+                    setTimeout(() => errorElement.remove(), 300);
+                }, 3000);
+            }
+            
+            // إضافة event listeners
+            nextButton.addEventListener('click', goToDesignSelection);
+            backButton.addEventListener('click', goBackToNameInput);
+            generateButton.addEventListener('click', generateCard);
+            languageSwitcher.addEventListener('click', toggleLanguage);
+            
+            // اختيار التصميم
+            designOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    designOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedDesign = this.getAttribute('data-design');
+                });
+            });
+            
+            // تفعيل الزر عند الضغط على Enter في أي حقل
+            [nameInputAr, nameInputEn].forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        goToDesignSelection();
+                    }
+                });
+            });
+            
+            // ضبط اتجاه النص الأولي للحقول
+            nameInputAr.style.textAlign = 'right';
+            nameInputEn.style.textAlign = 'left';
+            
+            // تحميل الخط مسبقاً عند دخول الصفحة
+            loadFont().catch(e => console.log('تحميل الخط المسبق:', e.message));
+        });
+    </script>
+</body>
+</html>
